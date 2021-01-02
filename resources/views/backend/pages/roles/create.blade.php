@@ -39,43 +39,34 @@
 
 
 <div class="card">
-<div class="card-header header-elements-inline">
-<h5 class="card-title">Permissions</h5>
-<div class="header-elements">
-<div class="list-icons">
-<a class="list-icons-item" data-action="collapse"></a>
-<a class="list-icons-item" data-action="reload"></a>
-<a class="list-icons-item" data-action="remove"></a>
-</div>
-</div>
-</div>
-
 <div class="card-body">
 <div class="row">
 <div class="col-md-6">
 
-    <div class="form-check">
- <input type="checkbox" class="form-check-input" id="checkPermissionAll" value="1">
-<label class="form-check-label" for="checkPermissionAll">All</label>
-        </div>
-<hr>
 
-<div class="form-group mb-3 mb-md-2">
+<div class="mb-3 mb-md-2">
 <label class="font-weight-semibold">Check Permission</label>
-<div class="row">
 <div class="col-md-12">
+<div class="form-group">
+<div class="form-check">      
+<input type="checkbox" class="form-check-input" value="1" name="BulkSelect" id="BulkSelect"/>Select All<br>
+<hr>
+</div></div>
 @foreach ($permissions as $permission)
+<div class="form-group">
 <div class="form-check">
-<label class="form-check-label">
-<input type="checkbox" name="permissions[]" for="checkPermission{{$permission->id}}" value="{{$permission->name}}" class="form-check-input-styled-success" data-fouc>
-{{$permission->name}}
-</label>
-</div>
+<label class="form-check-label"></label>
+<input type="checkbox" name="permissions[]" for="checkPermission{{$permission->id}}" value="{{$permission->name}}" 
+class="Bulkers form-check-input">{{$permission->name}}<br>
+</div></div>
 @endforeach
 
 </div>
 </div>
 </div>
+{{-- // Form Group end --}}
+
+
 </div>
 </div>
 </div>
@@ -88,10 +79,12 @@
 <div class="text-right">
 <button type="submit" class="btn btn-success">Submit Role <i class="icon-paperplane ml-2"></i></button>
 </div>
+
+
 </form>
 </div>
 </div>
-<!-- /basic legend -->
+
 
 </div>
 
@@ -107,11 +100,11 @@
 
 <script src="{{asset('backend/global_assets/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 
-<script>
+<script type="text/javascript">
     /**
     * Check all the permissions
     */
-    $("#checkPermissionAll").click(function(){
+    /* $("#checkPermissionAll").click(function(){
         if($(this).is(':checked')){
             // check all the checkbox
             $('input[type=checkbox]').prop('checked', true);
@@ -130,8 +123,17 @@
         }else{
             classCheckBox.prop('checked', false);
         }
-    }
+    } */
 
+    $(document).ready(function() {
+  $("#BulkSelect").click(function() {
+    $('.Bulkers').prop('checked', this.checked);
+  });
+
+  $('.Bulkers').change(function() {
+    $("#BulkSelect").prop("checked", $(".Bulkers").length === $(".Bulkers:checked").length);
+  });
+});
 
 </script>
 
